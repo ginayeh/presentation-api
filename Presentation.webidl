@@ -6,25 +6,43 @@
 
 [Pref="dom.presentation.enabled", AvailableIn="PrivilegedApps"]
 interface Presentation : EventTarget {
+  /*
+   * A requesting page use startSession() to start a new session, and the
+   * session will be returned with the promise. UA may show a prompt box with a
+   * list of available devices and ask the user to grant permission, choose a
+   * device, or cancel the operation.
+   *
+   * @url: The URL of presenting page.
+   * @sessionId: Optional. If it's not specified, a random alphanumeric value of
+   *             at least 16 characters drawn from the character [A-Za-z0-9] is
+   *             automatically generated as the id of the session.
+   *
+   * The promise is resolved when the presenting page is successfully loaded and
+   * the communication channel is established, i.e., the session state is
+   * "connected".
+   */
   [Throws]
-  Promise<PresentationSession> startSession(DOMString url, optional DOMString sessionId);
+  Promise<PresentationSession> startSession(DOMString url,
+                                            optional DOMString sessionId);
 
   /*
    * No prompt is popped up.
    */
   [Throws]
-  Promise<PresentationSession> joinSession(DOMString url, DOMString sessionId);
+  Promise<PresentationSession> joinSession(DOMString url,
+                                           DOMString sessionId);
 
   /**
    * This attribute is only available on the presenting page. It should be
    * created when loading the presenting page, and it's ready to be used after
    * 'onload' event is dispatched. 
    */
+  [Pure]
   readonly attribute PresentationSession? session;
 
  /*
-  * Device availability. If there are more than one available devices, the
-  * value is |true|. Otherwise, its value should be |false|.
+  * Device availability. If there is more than one device discovered by UA,
+  * the value is |true|. Otherwise, its value should be |false|.
   * 
   * UA triggers device discovery mechanism periodically and cache the latest
   * result in this attribute. Thus, it may be out-of-date when we're not in

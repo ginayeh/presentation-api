@@ -9,6 +9,7 @@ interface PresentationSession : EventTarget {
   /**
    * Unique id for all existing sessions.
    */
+  [Constant]
   readonly attribute DOMString id;
 
   /**
