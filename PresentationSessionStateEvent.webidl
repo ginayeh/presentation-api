@@ -6,8 +6,14 @@
 
 enum PresentationSessionState
 {
+  // Existing presentation, and the communication channel is active.
   "connected",
+
+  // Existing presentation, but the communication channel is inactive.
   "disconnected",
+
+  // The presentation is nonexistent. It could be terminated manually, or either
+  // requesting page or presenting page is no longer available.
   "terminated"
 };
 
