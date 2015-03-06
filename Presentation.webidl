@@ -21,7 +21,11 @@ interface Presentation : EventTarget {
    * the communication channel is established, i.e., the session state is
    * "connected".
    *
-   * TODO: exceptions.
+   * The promise may be rejected with the following errors:
+   * - "NoDeviceAvailable": No available device.
+   * - "PermissionDenied": User dismiss the device prompt box.
+   * - "ControlChannelFailed": Failed to establish control channel.
+   * - "DataChannelFailed": Failed to establish data channel.
    */
   [Throws]
   Promise<PresentationSession> startSession(DOMString url,
@@ -37,7 +41,10 @@ interface Presentation : EventTarget {
    * The promise is resolved with the same PresentationSession object when the
    * communication channel is re-established.
    *
-   * TODO: exceptions.
+   * The promise may be rejected with the following errors:
+   * - "NonexistentID: The ID cannot be found in existing presentations.
+   * - "ControlChannelFailed": Failed to establish control channel.
+   * - "DataChannelFailed": Failed to establish data channel.
    */
   [Throws]
   Promise<PresentationSession> joinSession(DOMString url,
