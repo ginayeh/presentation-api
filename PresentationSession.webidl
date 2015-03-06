@@ -6,39 +6,52 @@
 
 [Pref="dom.presentation.enabled", AvailableIn="PrivilegedApps"]
 interface PresentationSession : EventTarget {
-  /**
+  /*
    * Unique id for all existing sessions.
    */
   [Constant]
   readonly attribute DOMString id;
 
-  /**
-   * @value connected: Use postMessage() to send messages and terminate() to
-   *                   close the session. Listen |onmessage| to handle messages.
-   * @value disconnected: No operation is allowed at this state.
+  /*
+   * Please refer to PresentationSessionStateEvent.webidl for the declaration of
+   * PresentationSessionState.
+   *
+   * @value "connected", "disconnected", or "terminated".
    */
   readonly attribute PresentationSessionState state;
 
-  /**
-   * It is called when session state changes. New value is dispatched with
-   * the event.
+  /*
+   * It is called when session state changes. New state is dispatched with the
+   * event.
    */
            attribute EventHandler onstatechange;
 
-  /**
-   * This function is useful only if |state == 'connected'|.
+  /*
+   * After a communication channel has been established between the requesting
+   * page and the presenting page, postMessage() is called to send message to
+   * the other side, and the event handler "onmessage" will be invoked on the
+   * remote side.
+   *
+   * This function only works when state equals "connected".
+   *
+   * @data: String literal-only for current implementation.
    */
   [Throws]
   void postMessage(DOMString data);
 
-  /**
-   * This function is useful only if |state == 'connected'|.
+  /*
+   * It is triggered when receiving messages.
+   */
+           attribute EventHandler onmessage;
+
+  /*
+   * Both the requesting page and the presenting page can close the session by
+   * calling terminate(). Then, the session is destroyed and its state is
+   * truned into "terminated". After getting into the state of "terminated",
+   * joinSession() is incapable of re-establishing the connection.
+   *
+   * This function does nothing if the state has already been "terminated".
    */
   [Throws]
   void terminate();
-
-  /**
-   * It is called when receiving messages. 
-   */
-           attribute EventHandler onmessage;
 };

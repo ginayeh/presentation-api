@@ -20,13 +20,24 @@ interface Presentation : EventTarget {
    * The promise is resolved when the presenting page is successfully loaded and
    * the communication channel is established, i.e., the session state is
    * "connected".
+   *
+   * TODO: exceptions.
    */
   [Throws]
   Promise<PresentationSession> startSession(DOMString url,
                                             optional DOMString sessionId);
 
   /*
-   * No prompt is popped up.
+   * A requesting page may call joinSession() to re-connect existing
+   * presentations without prompting the user to select a device.
+   *
+   * @url: The URL of presenting page.
+   * @sessionId: Identifier for the session.
+   *
+   * The promise is resolved with the same PresentationSession object when the
+   * communication channel is re-established.
+   *
+   * TODO: exceptions.
    */
   [Throws]
   Promise<PresentationSession> joinSession(DOMString url,
