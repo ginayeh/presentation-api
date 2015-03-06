@@ -10,10 +10,10 @@
  AvailableIn="PrivilegedApps"]
 interface PresentationMessageEvent : Event
 {
-  readonly attribute any data;
+  readonly attribute DOMString data;
 };
 
 dictionary PresentationMessageEventInit : EventInit
 {
-  any data = null;
+  DOMString data = "";
 };
