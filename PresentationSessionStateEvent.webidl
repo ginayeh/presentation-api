@@ -12,8 +12,8 @@ enum PresentationSessionState
   // Existing presentation, but the communication channel is inactive.
   "disconnected",
 
-  // The presentation is nonexistent. It could be terminated manually, or either
-  // requesting page or presenting page is no longer available.
+  // The presentation is nonexistent anymore. It could be terminated manually,
+  // or either requesting page or presenting page is no longer available.
   "terminated"
 };
 

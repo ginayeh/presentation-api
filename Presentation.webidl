@@ -21,11 +21,15 @@ interface Presentation : EventTarget {
    * the communication channel is established, i.e., the session state is
    * "connected".
    *
-   * The promise may be rejected with the following errors:
-   * - "NoDeviceAvailable": No available device.
-   * - "PermissionDenied": User dismiss the device prompt box.
+   * The promise may be rejected duo to one of the following reasons:
+   * - "InternalError":        Unexpected internal error occurs.
+   * - "NoDeviceAvailable":    No available device.
+   * - "PermissionDenied":     User dismiss the device prompt box.
    * - "ControlChannelFailed": Failed to establish control channel.
-   * - "DataChannelFailed": Failed to establish data channel.
+   * - "ApplicationNotFound":  app:// scheme is supported on Firefox OS, but no
+   *                           corresponding application is found on remote side.
+   * - "PageLoadTimeout":      Presenting page takes too long to load.
+   * - "DataChannelFailed":    Failed to establish data channel.
    */
   [Throws]
   Promise<PresentationSession> startSession(DOMString url,
@@ -42,15 +46,19 @@ interface Presentation : EventTarget {
    * communication channel is re-established.
    *
    * The promise may be rejected with the following errors:
-   * - "NonexistentID: The ID cannot be found in existing presentations.
+   * - "InternalError":        Unexpected internal error occurs.
+   * - "NonexistentID:         The ID cannot be found in existing presentations.
    * - "ControlChannelFailed": Failed to establish control channel.
-   * - "DataChannelFailed": Failed to establish data channel.
+   * - "ApplicationNotFound":  app:// scheme is supported on Firefox OS, but no
+   *                           corresponding application is found on remote side.
+   * - "PageLoadTimeout":      Presenting page takes too long to load.
+   * - "DataChannelFailed":    Failed to establish data channel.
    */
   [Throws]
   Promise<PresentationSession> joinSession(DOMString url,
                                            DOMString sessionId);
 
-  /**
+  /*
    * This attribute is only available on the presenting page. It should be
    * created when loading the presenting page, and it's ready to be used after
    * 'onload' event is dispatched. 
@@ -69,7 +77,7 @@ interface Presentation : EventTarget {
   */
            attribute boolean cachedAvailable;
 
-  /**
+  /*
    * It is called when device availability changes. New value is dispatched with
    * the event.
    */
