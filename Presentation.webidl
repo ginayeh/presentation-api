@@ -26,7 +26,7 @@ interface Presentation : EventTarget {
    * - "NoDeviceAvailable":    No available device.
    * - "PermissionDenied":     User dismiss the device prompt box.
    * - "ControlChannelFailed": Failed to establish control channel.
-   * - "ApplicationNotFound":  app:// scheme is supported on Firefox OS, but no
+   * - "NoApplicationFound":  app:// scheme is supported on Firefox OS, but no
    *                           corresponding application is found on remote side.
    * - "PageLoadTimeout":      Presenting page takes too long to load.
    * - "DataChannelFailed":    Failed to establish data channel.
@@ -47,9 +47,10 @@ interface Presentation : EventTarget {
    *
    * The promise may be rejected with the following errors:
    * - "InternalError":        Unexpected internal error occurs.
-   * - "NonexistentID:         The ID cannot be found in existing presentations.
+   * - "NoPresentationFound:   No matching presentation found in existing
+   *                           presentations.
    * - "ControlChannelFailed": Failed to establish control channel.
-   * - "ApplicationNotFound":  app:// scheme is supported on Firefox OS, but no
+   * - "NoApplicationFound":   app:// scheme is supported on Firefox OS, but no
    *                           corresponding application is found on remote side.
    * - "PageLoadTimeout":      Presenting page takes too long to load.
    * - "DataChannelFailed":    Failed to establish data channel.
