@@ -75,7 +75,7 @@ interface Presentation : EventTarget {
   * discovery mode, however, it is still useful to give the developers an idea
   * that whether there are devices nearby some time ago.
   */
-           attribute boolean cachedAvailable;
+  readonly attribute boolean cachedAvailable;
 
   /*
    * It is called when device availability changes. New value is dispatched with
