@@ -48,7 +48,7 @@ interface PresentationSession : EventTarget {
    * Both the requesting page and the presenting page can close the session by
    * calling terminate(). Then, the session is destroyed and its state is
    * truned into "terminated". After getting into the state of "terminated",
-   * joinSession() is incapable of re-establishing the connection.
+   * resumeSession() is incapable of re-establishing the connection.
    *
    * This function does nothing if the state has already been "terminated".
    */

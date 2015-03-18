@@ -36,7 +36,7 @@ interface Presentation : EventTarget {
                                             optional DOMString sessionId);
 
   /*
-   * A requesting page may call joinSession() to re-connect existing
+   * A requesting page may call resumeSession() to re-connect existing
    * presentations without prompting the user to select a device.
    *
    * @url: The URL of presenting page.
@@ -56,8 +56,8 @@ interface Presentation : EventTarget {
    * - "DataChannelFailed":    Failed to establish data channel.
    */
   [Throws]
-  Promise<PresentationSession> joinSession(DOMString url,
-                                           DOMString sessionId);
+  Promise<PresentationSession> resumeSession(DOMString url,
+                                             DOMString sessionId);
 
   /*
    * This attribute is only available on the presenting page. It should be
