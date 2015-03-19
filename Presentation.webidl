@@ -62,7 +62,7 @@ interface Presentation : EventTarget {
   /*
    * This attribute is only available on the presenting page. It should be
    * created when loading the presenting page, and it's ready to be used after
-   * 'onload' event is dispatched. 
+   * 'onload' event is dispatched.
    */
   [Pure]
   readonly attribute PresentationSession? session;
@@ -70,7 +70,7 @@ interface Presentation : EventTarget {
  /*
   * Device availability. If there is more than one device discovered by UA,
   * the value is |true|. Otherwise, its value should be |false|.
-  * 
+  *
   * UA triggers device discovery mechanism periodically and cache the latest
   * result in this attribute. Thus, it may be out-of-date when we're not in
   * discovery mode, however, it is still useful to give the developers an idea
